@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 import random
 
 class Users_info(models.Model):
+    # this model for users information , which that gives you information about users like user type and their ciy and etc. 
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
-    code = models.CharField(default=123 , max_length = 3)
+    code = models.CharField(default=123 , max_length = 3 , unique=True)
     email = models.EmailField()
     personal_id = models.CharField(max_length=10,default =1234567890)
     city = models.CharField(
@@ -35,6 +36,7 @@ class Users_info(models.Model):
     
 
 class pyke_request(models.Model):
+    # this model is for person who has a request to be a peyk 
     user=models.ForeignKey(Users_info,on_delete=models.CASCADE)
     message = models.TextField()
     motor_type =  models.CharField(
@@ -62,17 +64,11 @@ class pyke_request(models.Model):
             self.user.user_type = 'peyk'
             self.user.save()
         return super().save()
-    
 
- # user = models.ForeignKey(User, on_delete=models.PROTECT)
-
-# class Meta:
-#         verbose_name = "Kelaasor Flight"
 
 
 class OTP(models.Model):
+    # this model for generating OTP when you wana to enter
     phone_number = models.CharField(max_length=11)
     otp = models.CharField(max_length=5)
-
-
 

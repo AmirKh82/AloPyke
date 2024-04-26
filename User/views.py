@@ -11,85 +11,68 @@ from django.contrib.auth.models import User
 
 
 class UserInfoView(generics.ListAPIView):
+    # in this view you can see the list of users 
     queryset= Users_info.objects.all()
     serializer_class = UserSerializer
 
 class CreateUserView(generics.CreateAPIView):
+    # in this view you can create a user 
     queryset= Users_info.objects.all()
     serializer_class = UserSerializer
 
 class DeleteUserView(generics.DestroyAPIView):
+    # in this view you can delete users 
     queryset = Users_info.objects.all()
     serializer_class = UserSerializer
 
 class RetrieveUserView(generics.RetrieveAPIView):
+    # in this view you can retrieve the users 
     queryset = Users_info.objects.all()
     serializer_class = UserSerializer
 
 class UpdateUserView(generics.UpdateAPIView):
+    # in this view you can update the users 
     queryset = Users_info.objects.all()
     serializer_class = UserSerializer
 
 class ConversionUserView(generics.RetrieveUpdateDestroyAPIView):
+     # in this view you can have a conversion on the users 
      queryset = Users_info.objects.all()
      serializer_class = UserSerializer
 
 class CreatePeykReq(generics.CreateAPIView):
+    # in this view you can create a request to be a peyk
     queryset= pyke_request.objects.all()
     serializer_class = PeykReqSerializer
 
 class PeykReqList(generics.ListAPIView):
+    # in this view you can see the list of PeykReq
     queryset= pyke_request.objects.all()
     serializer_class = PeykR2Serializer
 
 class DeletePeykReq(generics.DestroyAPIView):
+    # in this view you can delete PeykReq
     queryset = pyke_request.objects.all()
     serializer_class = PeykReqSerializer
 
 class RetrievePeykReq(generics.RetrieveAPIView):
+    # in this view you can retrieve PeykReq
     queryset = pyke_request.objects.all()
     serializer_class = PeykReqSerializer
 
 class UpdatePeykReq(generics.UpdateAPIView):
+    # in this view you can update the PeykReq
     queryset = pyke_request.objects.all()
     serializer_class = PeykReqSerializer
 
 class ConversionPeykReq(generics.RetrieveUpdateDestroyAPIView):
+     # in this view you can have a conversion on the PeykReq
      queryset = pyke_request.objects.all()
      serializer_class = PeykReqSerializer
 
-
-#  code for sign up ???
-class CodeView(APIView):
-
-    def post(self, request):
-        body = request.body
-        body = json.loads(body)
-        phone_number = body['phone_number']
-        code = random.randint(10000,99999)
-        Users_info.objects.create(
-            phone_number = phone_number,
-            code = code 
-        )
-        return Response(code)
-    
-
-
-    # class TicketList(generics.ListAPIView): -> tickect creat ?
-    # queryset = Ticket.objects.all()
-    # serializer_class = TicketSerializer
-    # authentication_classes = [JWTAuthentication,]
-
-    # def list(self, request, *args, **kwargs):
-    #     self.queryset = Ticket.objects.filter(user=request.user)
-    #     return super().list(request, *args, **kwargs)
-
-
-   # flight ..........   ok  
-     
-
 class OTPView(APIView):
 
+    # this view for generating OTP when you wana to enter
     def post(self, request):
         body = request.body
         body = json.loads(body)
@@ -103,6 +86,7 @@ class OTPView(APIView):
     
 class LoginView(APIView):
 
+    # in this view you can login to the site 
     def post(self, request):
         body = request.body
         body = json.loads(body)
@@ -127,24 +111,15 @@ class LoginView(APIView):
                 return Response("Otp is Wrong!", status=403)
         except:
             return Response("Something is Wrong!", status=500)
-    
-        
-# class TicketCreate(generics.CreateAPIView):
-#     queryset = Ticket.objects.all()
-#     serializer_class = TicketSerializer
-#     authentication_classes = [JWTAuthentication,]
 
-#     def create(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         code = self.perform_create(serializer, request)
-#         headers = self.get_success_headers(serializer.data)
-#         return Response("Ticket Reserved with {} reservation code!".format(code), status=status.HTTP_201_CREATED, headers=headers)
-
-#     def perform_create(self, serializer, request):
-#         code = generate_reservation_code()
-#         serializer.save(
-#             reservation_code = code,
-#             user = request.user
-#         )
-#         return code
+class SignUp(APIView):
+    # in this view you can signup to the site 
+    def post(self, request):
+        body = request.body
+        body = json.loads(body)
+        signup = body['UserSerializer']
+        Users_info.object.create(
+            serializer_class = UserSerializer
+            )
+        signup.save()
+        return(CreateUserView)    

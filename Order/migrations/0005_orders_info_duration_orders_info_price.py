@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='orders_info',
             name='duration',
-            field=models.TimeField(default=20),
+            field=models.TimeField(),
         ),
         migrations.AddField(
             model_name='orders_info',
             name='price',
-            field=models.CharField(default=20, max_length=15),
+            field=models.CharField(default='20', max_length=15),
         ),
     ]

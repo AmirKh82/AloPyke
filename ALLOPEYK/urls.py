@@ -1,6 +1,5 @@
 """
 URL configuration for ALLOPEYK project.
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
@@ -16,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+from .views import Welcome , About
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('User/', include('User.urls')),
     path('Order/', include('Order.urls')),
     path('auth/', include('User.urls')),
-        path('DRIVER/', include('Driver.urls')),
+    path('DRIVER/', include('Driver.urls')),
+    path('', Welcome),
+    path('About', About)
 ]
 
-# main app ?

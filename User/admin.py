@@ -1,6 +1,7 @@
 from django.contrib.admin import register, ModelAdmin
 from .models import  Users_info, pyke_request, OTP
 
+
 @register(Users_info)
 class Users_info_admin(ModelAdmin):
     list_display = ['first_name','last_name','user_type','code','personal_id','phone_number']
@@ -14,6 +15,7 @@ class pyke_request_admin(ModelAdmin):
     search_fields = ['user','motor_type','status']
     list_filter = ['user','motor_type','status']
     autocomplete_fields = ['user']
+
 
 @register(OTP)
 class OtpAdmin(ModelAdmin):

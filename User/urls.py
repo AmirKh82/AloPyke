@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import ( UserInfoView, CreateUserView, DeleteUserView, RetrieveUserView,
 ConversionUserView,CreatePeykReq,PeykReqList,DeletePeykReq ,
-RetrievePeykReq,UpdatePeykReq,ConversionPeykReq,OTPView,LoginView,UpdateUserView
+RetrievePeykReq,UpdatePeykReq,ConversionPeykReq,OTPView,LoginView,UpdateUserView,
+ SignUp
 )
 urlpatterns = [
     path('uers-list',UserInfoView.as_view(),name='uers-list'),
@@ -16,9 +17,8 @@ urlpatterns = [
     path('retrive-peyk-req/<int:pk>', RetrievePeykReq.as_view(),name='retrive-peyk-req'),
     path('update-peyk-req/<int:pk>', UpdatePeykReq.as_view(),name='update-peyk-req'),
     path('conversion-peyk-req/<int:pk>', ConversionPeykReq.as_view(),name='conversion-peyk-req'),
-    # afer this auth and defs 
     path('generate-otp', OTPView.as_view(), name='generate-otp'),
     path('login', LoginView.as_view(), name='login'),
-
+    path('signup',SignUp.as_view,name='signup')
 ]
  

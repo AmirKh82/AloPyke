@@ -17,4 +17,3 @@ def info_D(request):
 
 
 
-# why json ? and safe ? for response
